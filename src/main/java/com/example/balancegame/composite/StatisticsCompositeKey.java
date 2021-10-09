@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 @Embeddable
 public class StatisticsCompositeKey implements Serializable {
-    @Column(name = "catalog_id")
+    @Column(name = "catalog_id", unique = false)
     private Long catalogId; // @MapsId("catalogId")
 
     @Column(name = "choice")
