@@ -1,20 +1,25 @@
 package com.example.balancegame.entity;
 
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity(name = "question")
-public class Question {
+public class Question implements Serializable {
 
     @Id
     @Column(name = "user_code")
     private String userCode;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "catalog_id", nullable = false)
     private Catalog catalog;
 

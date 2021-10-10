@@ -1,6 +1,6 @@
 package com.example.balancegame.dto;
 
-import com.example.balancegame.entity.Question;
+import com.example.balancegame.entity.Statistics;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,6 +17,6 @@ import java.util.Set;
 public class CatalogDto implements Serializable {
     private Long catalogId;
     private String catalogName;
-    private String userCode;
-
+    private Set<QuestionDto> questionDtos = new HashSet<>();
+//    private Set<StatisticsDto> statisticsDtos = new HashSet<>();
 }

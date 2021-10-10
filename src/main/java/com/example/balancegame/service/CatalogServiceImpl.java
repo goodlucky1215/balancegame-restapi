@@ -2,9 +2,11 @@ package com.example.balancegame.service;
 
 import com.example.balancegame.dto.CatalogDto;
 import com.example.balancegame.dto.QuestionDto;
+import com.example.balancegame.dto.StatisticsDto;
 import com.example.balancegame.entity.Catalog;
 import com.example.balancegame.repository.CatalogRepository;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,13 +32,13 @@ public class CatalogServiceImpl implements CatalogService {
     public List<CatalogDto> getAllCatalogs() {
         List<Catalog> catalogs = catalogRepository.findAll();
         List<CatalogDto> catalogDtos = new ArrayList<>();
-        AtomicInteger index = new AtomicInteger();
         catalogs.forEach(c -> {
             catalogDtos.add(
                 CatalogDto.builder()
                         .catalogId(c.getCatalogId())
                         .catalogName(c.getCatalogName())
-                        .userCode(c.getQuestions().get(index.getAndIncrement()).getUserCode())
+                        .questionDtos(c.getQuestions().stream().map(q -> modelMapper.map(q, QuestionDto.class)).collect(Collectors.toSet()))
+//                        .statisticsDtos(c.getStatistics().stream().map(s -> modelMapper.map(s, StatisticsDto.class)).collect(Collectors.toSet()))
                         .build()
             );
         });

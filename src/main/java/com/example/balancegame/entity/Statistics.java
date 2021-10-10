@@ -1,21 +1,25 @@
 package com.example.balancegame.entity;
 
 import com.example.balancegame.composite.StatisticsCompositeKey;
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity(name = "statistics")
-public class Statistics {
+public class Statistics implements Serializable {
 
     @EmbeddedId
     private StatisticsCompositeKey id;
 
-//    @OneToOne(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "catalog_id", referencedColumnName = "catalog_id", insertable = false, updatable = false)
-//    @MapsId("catalogId")
-//    private Catalog catalog;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "catalog_id", referencedColumnName = "catalog_id", insertable = false, updatable = false)
+    @MapsId("catalogId")
+    private Catalog catalog;
 
     @Column(name = "result1", columnDefinition = "integer default 0")
     private int result1;

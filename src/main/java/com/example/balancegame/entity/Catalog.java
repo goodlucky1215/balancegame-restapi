@@ -1,16 +1,18 @@
 package com.example.balancegame.entity;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
-import java.util.ArrayList;
+import java.io.Serializable;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity(name = "catalog")
-public class Catalog {
+public class Catalog implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,9 +23,8 @@ public class Catalog {
     private String catalogName;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "catalog")
-    private List<Question> questions = new ArrayList<>();
+    private Set<Question> questions = new HashSet<>();
 
-//    @OneToOne
-//    @PrimaryKeyJoinColumn
-//    private Statistics statistics;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "catalog")
+    private Set<Statistics> statistics = new HashSet<>();
 }
