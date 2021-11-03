@@ -24,7 +24,7 @@ public class CatalogController {
     @GetMapping
     public ApiResponseDto getAllCatalogs() throws BackendException {
         try {
-            return new ApiResponseDto(true, catalogService.getAllCatalogs(), null);
+            return new ApiResponseDto(true, catalogService.getAllCatalogs(), null,catalogService.getUserCode());
         } catch (Exception e) {
             throw new BackendException(e.getMessage());
         }

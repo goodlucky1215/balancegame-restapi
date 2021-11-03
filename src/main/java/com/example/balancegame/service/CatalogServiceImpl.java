@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
@@ -44,5 +45,13 @@ public class CatalogServiceImpl implements CatalogService {
         });
         return catalogDtos;
 //        return catalogs.stream().map(c -> modelMapper.map(c, CatalogDto.class)).collect(Collectors.toList());
+    }
+
+    //사용자를 구분하기 위한 난수 생성
+    @Override
+    public String getUserCode() {
+        Random rnd = new Random();
+        rnd.setSeed(System.currentTimeMillis()); // 시드값을 설정하여 생성
+        return String.valueOf(rnd.nextLong());
     }
 }

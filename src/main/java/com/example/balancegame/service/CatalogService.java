@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface CatalogService {
     List<CatalogDto> getAllCatalogs();
+
+    String getUserCode();
 }
