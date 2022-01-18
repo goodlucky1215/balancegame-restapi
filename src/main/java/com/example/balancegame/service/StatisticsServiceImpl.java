@@ -55,11 +55,13 @@ public class StatisticsServiceImpl implements StatisticsService {
 
     @Override
     public String insertStatisticsService(Long catalogId,List<Integer> check) {
+        System.out.print("dfffffffffffffffffffffffffff");
         for(int i=0;i<check.size();i++){
             StatisticsCompositeKey id = new StatisticsCompositeKey();
             id.setCatalogId(catalogId);
             id.setChoice(check.get(i));
             List<Statistics> statisticsResult = statisticsRepository.findById(id);
+            System.out.print("dfffffffffffffffffffffffffff   =>"+statisticsResult.get(0).getResult1());
             Statistics statistics = new Statistics();
             statistics.getId().setCatalogId(catalogId);
             statistics.getId().setChoice(check.get(i));
@@ -97,6 +99,7 @@ public class StatisticsServiceImpl implements StatisticsService {
                 case 16 : statistics.setResult16(statisticsResult.get(0).getResult16()+1);
                     break;
             }
+            System.out.print("dfffhthrhtfffffffffffff");
             statisticsRepository.save(statistics);
         }
         return "success";

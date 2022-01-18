@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.Clock;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -46,8 +47,11 @@ public class StatisticsController {
         Gson gson = new Gson();
         Map map = gson.fromJson(req, Map.class);
         Long catalogId = Long.parseLong(String.valueOf(Integer.parseInt(String.valueOf(Math.round((Double) map.get("catalogId"))))));
-        List<Integer> check = (List<Integer>) map.get("check");
-
+        List<Double> checkDouble = (List<Double>) map.get("check");
+        List<Integer> check = new ArrayList<>();
+        for(Double i:checkDouble){
+            check.add(Integer.parseInt(String.valueOf(Math.round(i))));
+        }
         try {
             return new ApiResponseDto(true, statisticsService.insertStatisticsService(catalogId,check), null);
         } catch (Exception e) {
